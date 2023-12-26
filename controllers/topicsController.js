@@ -202,7 +202,7 @@ exports.handleCreateQuestion = async (req, res, next) => {
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,correctanswer,difficultylevel,topiccode } = req.body
+				const { question,video,quetype,examtype,queshift,queyear,correctanswer,difficultylevel,topiccode } = req.body
 				const connectedUser = req.user
 				const newQuestion = await Question.create({
 					content: question,
@@ -212,6 +212,8 @@ exports.handleCreateQuestion = async (req, res, next) => {
 					video:video ?? "no-video",
 					quetype: quetype,
 					examtype:examtype,
+					queshift: queshift,
+					queyear:queyear,
 					correctanswer: correctanswer,
 					difficultylevel:difficultylevel,
 					topiccode:topiccode,
@@ -262,7 +264,6 @@ exports.getAskQuestionPage = async (req, res, next) => {
 		connectedUser: req.user
 	}
 	const topicCode = await Topiccode.find({}, (err, topiccodes) => { });
-	
 	try {
 		const topic = await Topic.findById(req.params.id)
 		if (topic) {
