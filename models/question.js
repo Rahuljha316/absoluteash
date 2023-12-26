@@ -33,7 +33,14 @@ const questionSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-
+	queyear: {
+		type: String,
+		required: true
+	},
+	queshift: {
+		type: String,
+		required: true
+	},
 	creationDate: {
 		type: Date,
 		required: true,

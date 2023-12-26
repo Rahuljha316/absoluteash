@@ -1,13 +1,288 @@
 <script src="/js/tinymce/tinymce.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<!-- jQuery --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script>
     tinymce.init({
         selector: '#question',
     });
 </script>
+<style>
+.searchbox {
+    border:1px solid #456879;
+    border-radius:6px;
+    height: 39px;
+    width: 100%;
+    margin-top: 5px;
+}
+/*Style one*/
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:200");
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+.card {
+    background-color: #fff;
+    border-radius: 4px;
+    width: 300px;
+    margin: 30px auto;
+    padding: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    float: left;
+    align-items: center;
+    border: solid 1px #eee;
+    margin-right: 20px;
+    min-height: 150px;
+    position: relative;
+}
+.card-heading {
+    padding:10px; 
+    background: #eee;
+    border-bottom: #ddd solid 1px;
+}
+.card-heading h2{ 
+    margin: 0px; 
+    width: 100%; 
+    font-size: 20px;
+}
+.card-body{
+    padding: 15px;
+}
+.creative-checkbox {
+    display: inline;
+    position: static;
+    margin: 10px 10px;
+    overflow: hidden;
+    float: left;
+}
+.creative-checkbox p {
+    padding: 10px;
+    margin: 0;
+    float: left;
+    line-height: 20px;
+}
+.creative-checkbox input {
+    position: absolute;
+    visibility: hidden;
+}
+.creative-checkbox input + i {
+    border: 2px solid #ccc;
+    width: 40px;
+    height: 20px;
+    padding: 2px;
+    float: left;
+    border-radius: 20px;
+    transition: all .25s;
+}
+.creative-checkbox input + i:after {
+    content: ' ';
+    background-color: #ccc;
+    float: left;
+    width: 50%;
+    height: 100%;
+    border-radius: inherit;
+    transition: inherit;
+}
+.onOff input + i {
+    border: 2px solid #de1414;
+}
+.onOff input + i:after {
+    background-color: #de1414;
+}
+.creative-checkbox input:checked + i {
+    border-color: #2ab70e;
+}
+.creative-checkbox input:checked + i:after {
+    background-color: #2ab70e;
+    margin-left: 50%;
+}
+.creative-checkbox.halo-bg input:checked + i {
+    background-color: #e4ece3;
+}
+.creative-checkbox.green input:checked + i {
+    border-color: #2ab70e;
+}
+.creative-checkbox.green input:checked + i:after {
+    background-color: #2ab70e;
+}
+/*Style 2 using 1 css*/
+.style2 .creative-checkbox input + i {
+    width: 34px;
+}
+.style2 .creative-checkbox input + i:after {
+    width: 48%;
+}
+.style2 .creative-checkbox input:checked + i:after {
+    margin-left: 52%;
+}
+/*Style 3*/
+.switch {
+    display: inline-block;
+    height:28px;
+    position: relative;
+    width:50px;
+}
+.switch input {
+    display: none;
+}
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height:20px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width:20px;
+}
+input:checked + .slider {
+    background-color: #66bb6a;
+}
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/*Style 4*/
+ .switch2 {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.switch2 > span {
+  position: absolute;
+  top:11px;
+  pointer-events: none;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+  width: 50%;
+  text-align: center;
+}
+
+input.check-toggle-round-flat:checked ~ .off {
+  color: #000;
+}
+
+input.check-toggle-round-flat:checked ~ .on {
+  color: #fff;
+}
+
+.switch2 > span.on {
+  left: 0;
+  padding-left: 2px;
+  color: #fff;
+}
+
+.switch2 > span.off {
+  right: 0;
+  padding-right: 4px;
+  color: #000;
+}
+
+.check-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.check-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input.check-toggle-round-flat + label {
+  padding: 2px;
+  width: 97px;
+  height: 34px;
+  background-color:#d4d7d4;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+}
+input.check-toggle-round-flat + label:before, input.check-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+input.check-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #d4d7d4; 
+  border-radius: 60px;
+}
+input.check-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 46px;
+  background-color: #46a31d;
+  -webkit-border-radius: 52px;
+  -moz-border-radius: 52px;
+  -ms-border-radius: 52px;
+  -o-border-radius: 52px;
+  border-radius: 52px;
+  -webkit-transition: margin 0.2s;
+  -moz-transition: margin 0.2s;
+  -o-transition: margin 0.2s;
+  transition: margin 0.2s;
+}
+
+input.check-toggle-round-flat:checked + label {
+}
+
+input.check-toggle-round-flat:checked + label:after {
+  margin-left: 44px;
+    background: #e31b1b;
+}
+@media (max-width:1099px){
+    .card { 
+    width:45%;
+        margin: 0 2.5% 30px;
+}
+}
+@media (max-width:499px){
+    .card { 
+    width:95%; 
+}
+}
+</style>
 <div class="container container-forum">
     <div class="row">
         <div class="col-md-10 mx-auto" style="margin-top: 50px;">
@@ -35,67 +310,106 @@
 
     
                     <div class="form-group mb-4">
-                        <label for="descritpion">Your question</label>
+                        <label for="descritpion-1">Your question</label>
                         <textarea class="form-control" name="question" id="question" placeholder="question" rows="12"></textarea>
                     </div>
                     
 	           <div class="form-group mb-4">
-                    <label for="descritpion">Video solution Link</label>
+                    <label for="descritpion-2">Video solution Link</label>
                     <input type="text" name="video" class="form-control" id="concept">
                     
                 </div>
                 <div class='form-field'>
-    <label for='sizeFilter'>Question Type</label>
-    <select id='sizeFilter' name="quetype" class='form-control'>
-      <option>--Select--</option>
-    <option value="1">Single</option>
-    <option value="2">Multiple</option>
-    <option value="3">Subjective</option>
-    </select>
-  </div>
-<div class='form-field'>
-  <label for='sizeFilter'>Topic Codes</label>
-    <select id="searchableSelect"  name="topiccode" class='form-control'>
+  <label for='sizeFilter-2'>Topic Codes</label>
+    <select id="listBox1" name="topiccode" class='form-control'>
 
-    <option value="">--SELECT--</option>
+    <option value=""></option>
       {{#each optionp}}
         <option value="{{this.PHY110101}}">{{this.PHY110101}} - {{this.General_Physics}}- {{this.General_Concepts}}</option>
       {{/each}}
     </select>
+   
     
 </div>
-  <div class='form-field'>
-    <label for='sizeFilter'>Correct Answer</label>
-    <select id='sizeFilter' name="correctanswer" class='form-control'>
-      <option>--Select--</option>
-      <option value="1">A</option>
-    <option value="2">B</option>
-    <option value="3">C</option>
-    <option value="4">D</option>
-    <option value="5">E</option>
-    </select>
+                <div class='form-field'>
+    <div class='form-field' style="margin-top:8px;">
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        Single <input type="radio" value="1" name="quetype">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Multiple <input type="radio" value="2" name="quetype"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Subjective <input type="radio" value="3" name="quetype"><i></i>
+    </label> 
   </div>
-<div class='form-field'>
-    <label for='sizeFilter'>Exam Type</label>
-    <select id='sizeFilter' name="examtype" class='form-control'>
-      <option>--Select--</option>
-     <option value="1">IIT</option>
-    <option value="2">NEET</option>
-    <option value="3">JSO</option>
-    </select>
+  <br><br>
   </div>
 
+  <div class='form-field' style="margin-top:8px;">
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
+    <label class="creative-checkbox halo-bg">
+         A <input type="radio" value="A" name="correctanswer">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+         B <input type="radio" value="B" name="correctanswer"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+         C <input type="radio" value="C" name="correctanswer"><i></i>
+    </label> 
+    <label class="creative-checkbox halo-bg">
+        D <input type="radio" value="D" name="correctanswer"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        E <input type="radio" value="E" name="correctanswer"><i></i>
+    </label>
+  </div>
+  <br><br>
+<div class='form-field'>
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Exam Type</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        IIT Mains <input type="radio" value="1" name="examtype">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        IIT Advanced <input type="radio" value="2" name="examtype">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        NEET <input type="radio" value="3" name="examtype"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        JSO <input type="radio" value="4" name="examtype"><i></i>
+    </label> 
+  </div>
+<br><br>
+<div class="form-group mb-4">
+                    <label for="descritpion-2">Year</label>
+                    <input type="text" name="queyear" class="form-control" id="queyear">
+                    
+</div>
+<div class="form-group mb-4">
+    <label for="descritpion-2">Shift</label>
+    <input type="text" name="queshift" class="form-control" id="queshift">
+</div>
   <div class='form-field'>
-    <label for='sizeFilter'>Difficulty Level</label>
-    <select id='sizeFilter' name="difficultylevel" class='form-control'>
-     <option>--Select--</option>
-     <option value="1">Level 1</option>
-    <option value="2">Level 2</option>
-    <option value="3">Level 3</option>
-    </select>
-  </div><br>
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Difficulty Level</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        Level 1 <input type="radio" value="1" name="difficultylevel">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Level 2 <input type="radio" value="2" name="difficultylevel"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Level 3 <input type="radio" value="3" name="difficultylevel"><i></i>
+    </label>
+  </div><br><br><br>
  <div class="custom-file mb-4 form-group">
- <label class="custom-file-label" for='sizeFilter'>Question Image</label>
+ <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
                     <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" required>
                     <label class="custom-file-label" for="validatedCustomFile">choose the question's picture</label>
                     {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
@@ -121,23 +435,158 @@
 
 <script type="text/javascript">
 
-$(document).ready(function () {
-    // Initialize the select2 plugin
-    $('#searchableSelect').select2();
+  (function ($) {
 
-    // Handle the search input
-    //$('#searchInput').on('input', function () {
-      //  const searchTerm = $(this).val();
-        //$('#searchableSelect').val(null).trigger('change');
-        //$('#searchableSelect option').each(function () {
-          //  if ($(this).text().toLowerCase().includes(searchTerm.toLowerCase())) {
-            //    $(this).show();
-            //} else {
-              //  $(this).hide();
-           // }
-        // });
-    //});
-});
+      $.fn.searchit = function (options) {
+
+          return this.each(function () {
+
+              $.fn.searchit.globals = $.fn.searchit.globals || {
+                  counter: 0
+              }
+              $.fn.searchit.globals.counter++;
+              var $counter = $.fn.searchit.globals.counter;
+
+              var $t = $(this);
+              var opts = $.extend({}, $.fn.searchit.defaults, options);
+
+              // Setup default text field and class
+              if (opts.textField == null) {
+                  $t.before("<input type='textbox' id='__searchit" + $counter + "'><br>");
+                  opts.textField = $('#__searchit' + $counter);
+              }
+              if (opts.textField.length > 1) opts.textField = $(opts.textField[0]);
+
+              if (opts.textFieldClass) opts.textField.addClass(opts.textFieldClass);
+              //MY CODE-------------------------------------------------------------------
+              if (opts.selected) opts.textField.val($(this).find(":selected").val());
+              //MY CODE ENDS HERE -------------------------------------------------------
+              if (opts.dropDown) {
+                  $t.css("padding", "5px")
+                      .css("margin", "-5px -20px -5px -5px");
+
+                  $t.wrap("<div id='__searchitWrapper" + $counter + "' />");
+                  opts.wrp = $('#__searchitWrapper' + $counter);
+                  opts.wrp.css("display", "inline-block")
+                      .css("vertical-align", "top")
+                      .css("overflow", "hidden")
+                      .css("border", "solid grey 1px")
+                      .css("position", "absolute")
+                      .hide();
+                  if (opts.dropDownClass) opts.wrp.addClass(opts.dropDownClass);
+              }
+
+              opts.optionsFiltered = [];
+              opts.optionsCache = [];
+
+              // Save listbox current content
+              $t.find("option").each(function (index) {
+                  opts.optionsCache.push(this);
+              });
+
+              // Save options 
+              $t.data('opts', opts);
+
+              // Hook listbox click
+              $t.click(function (event) {
+                  _opts($t).textField.val($(this).find(":selected").text());
+                  _opts($t).wrp.hide();
+                  event.stopPropagation();
+              });
+
+              // Hook html page click to close dropdown
+              $("html").click(function () {
+                  _opts($t).wrp.hide();
+              });
+
+              // Hook the keyboard and we're done
+              _opts($t).textField.keyup(function (event) {
+                  if (event.keyCode == 13) {
+                      $(this).val($t.find(":selected").text());
+                      _opts($t).wrp.hide();
+                      return;
+                  }
+                  setTimeout(_findElementsInListBox($t, $(this)), 50);
+              })
+
+          })
+
+
+          function _findElementsInListBox(lb, txt) {
+
+              if (!lb.is(":visible")) {
+                  _showlb(lb);
+              }
+
+              _opts(lb).optionsFiltered = [];
+              var count = _opts(lb).optionsCache.length;
+              var dropDown = _opts(lb).dropDown;
+              var searchText = txt.val().toLowerCase();
+
+              // find match (just the old classic loop, will make the regexp later)
+              $.each(_opts(lb).optionsCache, function (index, value) {
+                  if ($(value).text().toLowerCase().indexOf(searchText) > -1) {
+                      // save matching items 
+                      _opts(lb).optionsFiltered.push(value);
+                  }
+
+                  // Trigger a listbox reload at the end of cycle    
+                  if (!--count) {
+                      _filterListBox(lb);
+                  }
+              });
+          }
+
+          function _opts(lb) {
+              return lb.data('opts');
+          }
+
+          function _showlb(lb) {
+              if (_opts(lb).dropDown) {
+                  var tf = _opts(lb).textField;
+                  lb.attr("size", _opts(lb).size);
+                  _opts(lb).wrp.show().offset({
+                      top: tf.offset().top + tf.outerHeight(),
+                      left: tf.offset().left
+                  });
+                  _opts(lb).wrp.css("width", tf.outerWidth() + "px");
+                  lb.css("width", (tf.outerWidth() + 25) + "px");
+              }
+          }
+
+          function _filterListBox(lb) {
+              lb.empty();
+
+              if (_opts(lb).optionsFiltered.length == 0) {
+                  lb.append("<option>" + _opts(lb).noElementText + "</option>");
+              } else {
+                  $.each(_opts(lb).optionsFiltered, function (index, value) {
+                      lb.append(value);
+                  });
+                  lb[0].selectedIndex = 0;
+              }
+          }
+      }
+
+      $.fn.searchit.defaults = {
+          textField: null,
+          textFieldClass: null,
+          dropDown: true,
+          dropDownClass: null,
+          size: 5,
+          filtered: true,
+          noElementText: "No elements found",
+          //MY CODE------------------------------------------
+          selected: false
+          //MY CODE ENDS ------------------------------------
+      }
+
+  }(jQuery))
+
+   $("select").searchit({
+      textFieldClass: 'searchbox',
+      selected: true
+  });
 
 
 </script>
