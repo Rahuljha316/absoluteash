@@ -9,6 +9,10 @@ const questionSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	imageForAnsName: {
+		type: String,
+		required: true
+	},
 	video: {
 		type: String,
 		required: false
@@ -38,6 +42,10 @@ const questionSchema = mongoose.Schema({
 		required: true
 	},
 	queshift: {
+		type: String,
+		required: true
+	},
+	showAns: {
 		type: String,
 		required: true
 	},

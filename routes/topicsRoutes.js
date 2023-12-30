@@ -18,7 +18,7 @@ router.post(
 router.get("/:id", topicsController.getTopicById)
 
 router.get("/:id/question", usersController.checkAuthenticated, topicsController.getAskQuestionPage)
-router.post("/:id/question", usersController.checkAuthenticated,topicsController.upload.single("image"), topicsController.validateQuestionFormFields(), topicsController.handleCreateQuestion)
+router.post("/:id/question", usersController.checkAuthenticated,topicsController.upload.fields([{ name: 'image', maxCount: 1 }, { name: 'imageAns', maxCount: 1 }]), topicsController.validateQuestionFormFields(), topicsController.handleCreateQuestion)
 
 router.post("/follow-unfollow", usersController.checkAuthenticated, topicsController.handleFollowingUnfollowing)
 

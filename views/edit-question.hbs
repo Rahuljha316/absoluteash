@@ -327,7 +327,7 @@ input.check-toggle-round-flat:checked + label:after {
                     </div>    
 	           <div class="form-group mb-4">
                     <label for="descritpion-2">Video solution Link</label>
-                    <input type="text" name="video" class="form-control" id="concept">
+                    <input type="text" name="video" class="form-control" value="{{topic.video}}" id="concept">
                     
                 </div>
                 <div class='form-field'>
@@ -336,7 +336,7 @@ input.check-toggle-round-flat:checked + label:after {
 
     <option value=""></option>
       {{#each optionp}}
-        <option value="{{this.PHY110101}}">{{this.PHY110101}} - {{this.General_Physics}}- {{this.General_Concepts}}</option>
+        <option value="{{this.PHY110101}}" {{#if this.isSelected }} selected  {{/if}}>{{this.PHY110101}} - {{this.General_Physics}}- {{this.General_Concepts}}</option>
       {{/each}}
     </select>
    
@@ -346,14 +346,14 @@ input.check-toggle-round-flat:checked + label:after {
     <div class='form-field' style="margin-top:8px;">
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
     <label class="creative-checkbox halo-bg">
-        Single <input type="radio" value="1" onclick="morethan(this)" name="quetype">
+        Single <input type="radio" value="1" onclick="morethan(this)" {{#if (eq "1" topic.quetype) }} checked  {{/if}} name="quetype">
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        Multiple <input type="radio" value="2" onclick="morethan(this)" name="quetype"><i></i>
+        Multiple <input type="radio" value="2" onclick="morethan(this)" {{#if (eq "2" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        Subjective <input type="radio" value="3" onclick="morethan(this)" name="quetype"><i></i>
+        Subjective <input type="radio" value="3" onclick="morethan(this)" {{#if (eq "3" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
     </label> 
   </div>
   <br><br>
