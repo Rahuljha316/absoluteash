@@ -176,12 +176,12 @@ exports.getCreateTopicPage = (req, res, next) => {
 
 exports.validateQuestionFormFields = () => {
 	return [
-		validator
-			.check("question")
-			.notEmpty()
-			.withMessage("question content cannot be empty!")
-			.isLength({ min: 10 })
-			.withMessage("question length must be at least 10 chars!")
+		// validator
+		// 	.check("question")
+		// 	.notEmpty()
+		// 	.withMessage("question content cannot be empty!")
+		// 	.isLength({ min: 5 })
+		// 	.withMessage("question length must be at least 5 chars!")
 	]
 }
 
@@ -195,26 +195,34 @@ exports.handleCreateQuestion = async (req, res, next) => {
 	try {
 		const topicId = req.params.id
 		const topic = await Topic.findById(topicId)
-		console.log('Request '+req);
+		//console.log('Request '+req);
+	    
+	    //latestRecordVal = latestRecordVal.split("-");
 		if (topic) {
-			
-
+			console.log('Files 1'+req.files['image'][0].filename);
+			console.log('Files 2'+req.files['imageAns'][0].filename);
+			const latestRecord = await Question.findOne().sort({ _id: -1 });
+    		var latestRecordVal = latestRecord.content;
+    		latestRecordVal = latestRecordVal.split('-');
+    		const latestRecordValNum = parseInt(latestRecordVal[1]) + 1;
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,queshift,queyear,correctanswer,difficultylevel,topiccode } = req.body
+				const { question,video,quetype,examtype,queshift,queyear,showAns,correctanswer,difficultylevel,topiccode } = req.body
 				const connectedUser = req.user
 				const newQuestion = await Question.create({
-					content: question,
+					content: 'QUESTION-'+latestRecordValNum,
 					user: connectedUser._id,
-					imageName: req.file ? req.file.filename : "default-topic-image.png",
+					imageName: req.files['image'][0] ? req.files['image'][0].filename : "default-topic-image.png",
+					imageForAnsName: req.files['imageAns'][0] ? req.files['imageAns'][0].filename : "default-topic-image.png",
 					topic: topicId,
 					video:video ?? "no-video",
 					quetype: quetype,
 					examtype:examtype,
 					queshift: queshift,
 					queyear:queyear,
-					correctanswer: correctanswer,
+					showAns:showAns,
+					correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
 					difficultylevel:difficultylevel,
 					topiccode:topiccode,
 				})
@@ -241,14 +249,20 @@ exports.handleCreateQuestion = async (req, res, next) => {
 						useFindAndModify: false
 					}
 				)
-
 				input.successMessage = "question successfull created"
 			}
 
 			input.topic = topic
 		}
-
-		res.render("ask-question", input)
+		// const inputNew = {
+		// 	title: "Ask A Question",
+		// 	connectedUser: req.user
+		// }
+		// const topicL = await Topic.findById(req.params.id)
+		// if (topic) {
+		// 	inputNew.topic = topicL;
+		// }
+		res.redirect("question")
 	} catch (error) {
 		if (error.message && error.message.includes("Cast to ObjectId failed for value")) {
 			res.render("ask-question", input)
@@ -263,6 +277,7 @@ exports.getAskQuestionPage = async (req, res, next) => {
 		title: "Ask A Question",
 		connectedUser: req.user
 	}
+
 	const topicCode = await Topiccode.find({}, (err, topiccodes) => { });
 	try {
 		const topic = await Topic.findById(req.params.id)
