@@ -1,17 +1,25 @@
-<script src="/js/tinymce/tinymce.min.js"></script>
-
-
 <!-- jQuery --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
 <!-- Select2 JS --> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
-<script>
-    tinymce.init({
-        selector: '#question',
-    });
+<!--<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
+<script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+ <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.3.0/es5/tex-mml-chtml.js"
+        id="MathJax-script"
+></script>-->
+
+<!--<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>-->
+  <!-- Include TinyMCE script -->
+  <!--<script src="https://cdn.tiny.cloud/1/e1r94crm0f2nvxd5v3j0wbitu9php8gq7uhpfxgpd3wcnfqh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
+  <script src="/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="/js/onPage.js" referrerpolicy="origin"></script>
+
 <style>
 .searchbox {
     border:1px solid #456879;
@@ -288,7 +296,7 @@ input.check-toggle-round-flat:checked + label:after {
         <div class="col-md-10 mx-auto" style="margin-top: 50px;">
 
             {{#if topic}}
-                <form action="/topics/{{topic._id}}/question" method="POST" enctype="multipart/form-data" class="form-border">
+                <form action="/questions/{{topic._id}}/edit" method="POST" enctype="application/x-www-form-urlencoded" class="form-border">
                     <h3 class="text-center"><a href="/topics/{{topic._id}}" class="text-capitalize text-primary text-decoration-none"> {{topic.name}} </a> </h3>
 
                     {{#if successMessage}}
@@ -306,26 +314,54 @@ input.check-toggle-round-flat:checked + label:after {
                         {{/each}}
                     {{/if}}
 
+   <!-- \( \[\frac{-vb\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch\( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) bjhjbjbh jbjhbjhbjhbjbj
+\( a^3/2a \) hello one two three nmdlkcnksdcnjdsncj bjhbcjwhbchj wbejhebjhewb 
+\( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj hjsbjahbjahbj hsbjhabjhasjchbd \( 1/ 2a^3 \)
 
-
-    
-                    <div class="form-group mb-4" style="display:none;">
+hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch 
+\( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \)  \( \frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab} \) njjkenfkjnfkj \( \lim_{x \to a} f(x) \)
+<br>Hello:<br>
+<p><span class="math-tex">\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)</span> nknkj hello one two three four heelo this is what you want <span class="math-tex">\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)</span></p>-->
+<input type="hidden" name="queId" value="{{topic._id}}">
+                    <div class="form-group mb-4 " >
                         <label for="descritpion-1">Your question</label>
-                        <textarea class="form-control" name="question" id="question" placeholder="question" rows="12"></textarea>
+                        <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12">{{topic.question}}  </textarea>
                     </div>
+                     <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 1</label>
+                        <textarea class="form-control latex" name="answerOne" id="answer-1" placeholder="question" rows="12">{{topic.answerOne}}  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 2</label>
+                        <textarea class="form-control latex" name="answerTwo" id="answer-2" placeholder="question" rows="12">{{topic.answerTwo}}  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 3</label>
+                        <textarea class="form-control latex" name="answerThree" id="answer-3" placeholder="question" rows="12">{{topic.answerThree}}  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 4</label>
+                        <textarea class="form-control latex" name="answerFour" id="answer-4" placeholder="question" rows="12">{{topic.answerFour}} </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 5</label>
+                        <textarea class="form-control latex" name="answerFive" id="answer-5" placeholder="question" rows="12">{{topic.answerFive}}  </textarea>
+                    </div>
+                     <button onclick="getTextContent()">Get Text Content</button>
+  <div id="outputDiv"></div>
                  <div class="custom-file mb-4 form-group">
  <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
-                    <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" >
                     <label class="custom-file-label" for="validatedCustomFile">choose the question's picture</label>
                     {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
                 </div>
 
                 <div class="custom-file mb-4">
-                        <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" required>
+                        <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" >
                         <label class="custom-file-label" for="validatedCustomFileAns">choose the answer's picture</label>
                         {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
                     </div>    
-	           <div class="form-group mb-4">
+             <div class="form-group mb-4">
                     <label for="descritpion-2">Video solution Link</label>
                     <input type="text" name="video" class="form-control" value="{{topic.video}}" id="concept">
                     
@@ -362,54 +398,54 @@ input.check-toggle-round-flat:checked + label:after {
   <div class='form-field' style="margin-top:8px;">
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
     <label class="creative-checkbox halo-bg">
-         A <input type="radio" value="A" name="correctanswer">
+         A <input type="checkbox" value="A" name="correctanswer" {{#if (contains "A" topic.correctanswer) }} checked  {{/if}}>
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-         B <input type="radio" value="B" name="correctanswer"><i></i>
+         B <input type="checkbox" value="B" name="correctanswer" {{#if (contains "B" topic.correctanswer) }} checked  {{/if}}><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-         C <input type="radio" value="C" name="correctanswer"><i></i>
+         C <input type="checkbox" value="C" name="correctanswer" {{#if (contains "C" topic.correctanswer) }} checked  {{/if}}><i></i>
     </label> 
     <label class="creative-checkbox halo-bg">
-        D <input type="radio" value="D" name="correctanswer"><i></i>
+        D <input type="checkbox" value="D" name="correctanswer" {{#if (contains "D" topic.correctanswer) }} checked  {{/if}}><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        E <input type="radio" value="E" name="correctanswer"><i></i>
+        E <input type="checkbox" value="E" name="correctanswer" {{#if (contains "E" topic.correctanswer) }} checked  {{/if}}><i></i>
     </label>
   </div>
   <br><br>
 <div class='form-field'>
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Exam Type</label><br><br>
     <label class="creative-checkbox halo-bg">
-        IIT Mains <input type="radio" value="1" name="examtype">
+        IIT Mains <input type="radio" value="1" {{#if (eq "1" topic.examtype) }} checked  {{/if}} name="examtype">
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        IIT Advanced <input type="radio" value="2" name="examtype">
+        IIT Advanced <input type="radio" value="2" {{#if (eq "2" topic.examtype) }} checked  {{/if}} name="examtype">
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        NEET <input type="radio" value="3" name="examtype"><i></i>
+        NEET <input type="radio" value="3" {{#if (eq "3" topic.examtype) }} checked  {{/if}} name="examtype"><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        JSO <input type="radio" value="4" name="examtype"><i></i>
+        JSO <input type="radio" value="4" {{#if (eq "4" topic.examtype) }} checked  {{/if}} name="examtype"><i></i>
     </label> 
   </div>
 <br><br>
 <div class="form-group mb-4">
                     <label for="descritpion-2">Year</label>
-                    <input type="text" name="queyear" class="form-control" id="queyear">
+                    <input type="text" name="queyear" class="form-control" value="{{topic.queyear}}" id="queyear" required>
                     
 </div>
 <div class='form-field'>
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Shift</label><br><br>
     <label class="creative-checkbox halo-bg">
-        Shift 1 <input type="radio" value="1" name="queshift">
+        Shift 1 <input type="radio" value="1" {{#if (eq "1" topic.queshift) }} checked  {{/if}} name="queshift">
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        Shift 2 <input type="radio" value="2" name="queshift">
+        Shift 2 <input type="radio" value="2" {{#if (eq "2" topic.queshift) }} checked  {{/if}} name="queshift">
         <i></i>
     </label>
   </div>
@@ -417,25 +453,35 @@ input.check-toggle-round-flat:checked + label:after {
   <div class='form-field'>
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Difficulty Level</label><br><br>
     <label class="creative-checkbox halo-bg">
-        Level 1 <input type="radio" value="1" name="difficultylevel">
+        Level 1 <input type="radio" value="1" {{#if (eq "1" topic.difficultylevel) }} checked  {{/if}}  name="difficultylevel">
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        Level 2 <input type="radio" value="2" name="difficultylevel"><i></i>
+        Level 2 <input type="radio" value="2" {{#if (eq "2" topic.difficultylevel) }} checked  {{/if}} name="difficultylevel"><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        Level 3 <input type="radio" value="3" name="difficultylevel"><i></i>
+        Level 3 <input type="radio" value="3" {{#if (eq "3" topic.difficultylevel) }} checked  {{/if}} name="difficultylevel"><i></i>
     </label>
   </div><br><br><br>
 
   <div class='form-field'>
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Answer</label><br><br>
     <label class="creative-checkbox halo-bg">
-        Yes <input type="radio" value="1" name="showAns" checked>
+        Yes <input type="radio" value="1" name="showAns" {{#if (eq "1" topic.showAns) }} checked  {{/if}} >
         <i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        No <input type="radio" value="2" name="showAns" ><i></i>
+        No <input type="radio" value="2" name="showAns" {{#if (eq "2" topic.showAns) }} checked  {{/if}} ><i></i>
+    </label>
+  </div><br><br><br>
+  <div class='form-field'>
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Five</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        Yes <input type="radio" value="1" name="showFive" {{#if (eq "1" topic.showFive) }} checked  {{/if}}>
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        No <input type="radio" value="2" name="showFive" {{#if (eq "2" topic.showFive) }} checked  {{/if}}><i></i>
     </label>
   </div><br><br><br>
 
@@ -443,9 +489,9 @@ input.check-toggle-round-flat:checked + label:after {
                         style="background-color: #324f6c;
                         color: white;
                         font-weight: 300;
-                        font-size: larger;"
+                        font-size: larger;" type="submit"
                     >
-                        Save & Next
+                        Update
                     </button>
 
                 </form>
@@ -460,170 +506,8 @@ input.check-toggle-round-flat:checked + label:after {
 
 <script type="text/javascript">
 
-  (function ($) {
-
-      $.fn.searchit = function (options) {
-
-          return this.each(function () {
-
-              $.fn.searchit.globals = $.fn.searchit.globals || {
-                  counter: 0
-              }
-              $.fn.searchit.globals.counter++;
-              var $counter = $.fn.searchit.globals.counter;
-
-              var $t = $(this);
-              var opts = $.extend({}, $.fn.searchit.defaults, options);
-
-              // Setup default text field and class
-              if (opts.textField == null) {
-                  $t.before("<input type='textbox' id='__searchit" + $counter + "'><br>");
-                  opts.textField = $('#__searchit' + $counter);
-              }
-              if (opts.textField.length > 1) opts.textField = $(opts.textField[0]);
-
-              if (opts.textFieldClass) opts.textField.addClass(opts.textFieldClass);
-              //MY CODE-------------------------------------------------------------------
-              if (opts.selected) opts.textField.val($(this).find(":selected").val());
-              //MY CODE ENDS HERE -------------------------------------------------------
-              if (opts.dropDown) {
-                  $t.css("padding", "5px")
-                      .css("margin", "-5px -20px -5px -5px");
-
-                  $t.wrap("<div id='__searchitWrapper" + $counter + "' />");
-                  opts.wrp = $('#__searchitWrapper' + $counter);
-                  opts.wrp.css("display", "inline-block")
-                      .css("vertical-align", "top")
-                      .css("overflow", "hidden")
-                      .css("border", "solid grey 1px")
-                      .css("position", "absolute")
-                      .hide();
-                  if (opts.dropDownClass) opts.wrp.addClass(opts.dropDownClass);
-              }
-
-              opts.optionsFiltered = [];
-              opts.optionsCache = [];
-
-              // Save listbox current content
-              $t.find("option").each(function (index) {
-                  opts.optionsCache.push(this);
-              });
-
-              // Save options 
-              $t.data('opts', opts);
-
-              // Hook listbox click
-              $t.click(function (event) {
-                  _opts($t).textField.val($(this).find(":selected").text());
-                  _opts($t).wrp.hide();
-                  event.stopPropagation();
-              });
-
-              // Hook html page click to close dropdown
-              $("html").click(function () {
-                  _opts($t).wrp.hide();
-              });
-
-              // Hook the keyboard and we're done
-              _opts($t).textField.keyup(function (event) {
-                  if (event.keyCode == 13) {
-                      $(this).val($t.find(":selected").text());
-                      _opts($t).wrp.hide();
-                      return;
-                  }
-                  setTimeout(_findElementsInListBox($t, $(this)), 50);
-              })
-
-          })
-
-
-          function _findElementsInListBox(lb, txt) {
-
-              if (!lb.is(":visible")) {
-                  _showlb(lb);
-              }
-
-              _opts(lb).optionsFiltered = [];
-              var count = _opts(lb).optionsCache.length;
-              var dropDown = _opts(lb).dropDown;
-              var searchText = txt.val().toLowerCase();
-
-              // find match (just the old classic loop, will make the regexp later)
-              $.each(_opts(lb).optionsCache, function (index, value) {
-                  if ($(value).text().toLowerCase().indexOf(searchText) > -1) {
-                      // save matching items 
-                      _opts(lb).optionsFiltered.push(value);
-                  }
-
-                  // Trigger a listbox reload at the end of cycle    
-                  if (!--count) {
-                      _filterListBox(lb);
-                  }
-              });
-          }
-
-          function _opts(lb) {
-              return lb.data('opts');
-          }
-
-          function _showlb(lb) {
-              if (_opts(lb).dropDown) {
-                  var tf = _opts(lb).textField;
-                  lb.attr("size", _opts(lb).size);
-                  _opts(lb).wrp.show().offset({
-                      top: tf.offset().top + tf.outerHeight(),
-                      left: tf.offset().left
-                  });
-                  _opts(lb).wrp.css("width", tf.outerWidth() + "px");
-                  lb.css("width", (tf.outerWidth() + 25) + "px");
-              }
-          }
-
-          function _filterListBox(lb) {
-              lb.empty();
-
-              if (_opts(lb).optionsFiltered.length == 0) {
-                  lb.append("<option>" + _opts(lb).noElementText + "</option>");
-              } else {
-                  $.each(_opts(lb).optionsFiltered, function (index, value) {
-                      lb.append(value);
-                  });
-                  lb[0].selectedIndex = 0;
-              }
-          }
-      }
-
-      $.fn.searchit.defaults = {
-          textField: null,
-          textFieldClass: null,
-          dropDown: true,
-          dropDownClass: null,
-          size: 5,
-          filtered: true,
-          noElementText: "No elements found",
-          //MY CODE------------------------------------------
-          selected: false
-          //MY CODE ENDS ------------------------------------
-      }
-
-  }(jQuery))
-
-   $("select").searchit({
+ $("select").searchit({
       textFieldClass: 'searchbox',
       selected: true
   });
-
-  function morethan(cbox) {
-    // setup new state
-    var radioInput = $('input[name="quetype"]:checked').val();
-    var state = "radio";
-    if (radioInput == 2) {
-        state = "checkbox";
-    }
-    // get all by name and change state
-    var radios = document.getElementsByName('correctanswer');
-    for (i = 0; i < radios.length; i++) {
-        radios[i].type = state;
-    }
-}
 </script>

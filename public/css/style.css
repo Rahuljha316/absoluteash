@@ -15,7 +15,19 @@ body a:hover {
 	text-decoration: underline;
 	color: #333;
 }
+#searchInput {
+  margin: 10px 0;
+  padding: 5px;
+}
 
+#searchableSelect {
+  /*width: 200px;*/
+  padding: 5px;
+}
+
+option {
+  /*display: none;*/
+}
 /* index.php */
 
 /* topic.php */

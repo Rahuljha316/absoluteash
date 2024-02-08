@@ -1,4 +1,3 @@
-require('dotenv').config();
 const createError = require("http-errors")
 const express = require("express")
 const path = require("path")
@@ -20,7 +19,6 @@ const answersRoutes = require("./routes/answersRoutes")
 const topicsRoutes = require("./routes/topicsRoutes")
 
 const app = express()
-
 //database setup
 const {
 	DB_USER,
@@ -29,10 +27,9 @@ const {
 	DB_HOST,
 	DB_PORT,
 	DB_NAME,
-	DB_CONNECTION_URL,
 } = process.env;
 
-mongoose.connect(DB_CONNECTION_URL, {
+mongoose.connect(`mongodb://localhost:27017/social_network_db`, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 })
@@ -55,7 +52,9 @@ app.engine(
 							.map((s) => s[0].toUpperCase() + s.slice(1))
 							.join(" ")
 					: "",
-			upperFirstChar: (str) => (str ? str[0].toUpperCase() + str.slice(1) : "")
+			upperFirstChar: (str) => (str ? str[0].toUpperCase() + str.slice(1) : ""),
+			eq: (a,b) => a === b ? true : false,
+			contains: (a,b) => b.includes(a) ? true : false
 		},
 		extname: ".hbs",
 		handlebars: allowInsecurePrototypeAccess(handlebars)

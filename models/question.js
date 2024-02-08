@@ -5,6 +5,10 @@ const questionSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	question: {
+		type: String,
+		required: true
+	},
 	imageName: {
 		type: String,
 		required: true
@@ -46,6 +50,34 @@ const questionSchema = mongoose.Schema({
 		required: true
 	},
 	showAns: {
+		type: String,
+		required: true
+	},
+	showFive: {
+		type: String,
+		required: true
+	},
+	answerOne: {
+		type: String,
+		required: true
+	},
+	answerTwo: {
+		type: String,
+		required: true
+	},
+	slugText: {
+		type: String,
+		required: true
+	},
+	answerThree: {
+		type: String,
+		required: true
+	},
+	answerFour: {
+		type: String,
+		required: true
+	},
+	answerFive: {
 		type: String,
 		required: true
 	},

@@ -50,4 +50,4 @@ const topicCodeSchema = mongoose.Schema({
 	//]
 })
 
-module.exports = mongoose.model("TopicCode", topicCodeSchema)
+module.exports = mongoose.model("Topiccode", topicCodeSchema)

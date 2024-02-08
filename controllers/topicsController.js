@@ -8,6 +8,7 @@ const validator = require("express-validator")
 const handlebars = require('handlebars')
 const express = require('express')
 const exphbs = require('express-handlebars')
+const cheerio = require('cheerio')
 const dropdownOptions = ['Option 1', 'Option 2', 'Option 3']
 // handlebars.registerHelper('splitCommaSeparated', function (input) {
 //     return input.split(',').map(item => item.trim());
@@ -199,22 +200,36 @@ exports.handleCreateQuestion = async (req, res, next) => {
 	    
 	    //latestRecordVal = latestRecordVal.split("-");
 		if (topic) {
-			console.log('Files 1'+req.files['image'][0].filename);
-			console.log('Files 2'+req.files['imageAns'][0].filename);
+			//console.log('Files 1'+req.files['image'][0].filename);
+			//console.log('Files 2'+req.files['imageAns'][0].filename);
 			const latestRecord = await Question.findOne().sort({ _id: -1 });
     		var latestRecordVal = latestRecord.content;
     		latestRecordVal = latestRecordVal.split('-');
     		const latestRecordValNum = parseInt(latestRecordVal[1]) + 1;
+    		// Check if req.files and req.files['image'] are defined
+    		var quesImage = false;
+    		var ansImage = false;
+			if (req.files && req.files['image']) {
+			  if (req.files['image'].length > 0) {
+			    var quesImage = true;
+			  }
+			}
+			if (req.files && req.files['imageAns']) {
+			  if (req.files['imageAns'].length > 0) {
+			    var ansImage = true;
+			  }
+			}
+
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,queshift,queyear,showAns,correctanswer,difficultylevel,topiccode } = req.body
+				const { question,video,quetype,examtype,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive } = req.body
 				const connectedUser = req.user
 				const newQuestion = await Question.create({
 					content: 'QUESTION-'+latestRecordValNum,
 					user: connectedUser._id,
-					imageName: req.files['image'][0] ? req.files['image'][0].filename : "default-topic-image.png",
-					imageForAnsName: req.files['imageAns'][0] ? req.files['imageAns'][0].filename : "default-topic-image.png",
+					imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+					imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
 					topic: topicId,
 					video:video ?? "no-video",
 					quetype: quetype,
@@ -222,6 +237,13 @@ exports.handleCreateQuestion = async (req, res, next) => {
 					queshift: queshift,
 					queyear:queyear,
 					showAns:showAns,
+					question:question,
+					answerOne:answerOne,
+					answerTwo: answerTwo,
+					answerThree:answerThree,
+					answerFour:answerFour,
+					answerFive:answerFive,
+					showFive : showFive,
 					correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
 					difficultylevel:difficultylevel,
 					topiccode:topiccode,

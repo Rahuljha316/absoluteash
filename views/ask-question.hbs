@@ -1,16 +1,81 @@
-<script src="/js/tinymce/tinymce.min.js"></script>
-
-
 <!-- jQuery --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
 <!-- Select2 JS --> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<!--<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+ <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.3.0/es5/tex-mml-chtml.js"
+        id="MathJax-script"
+></script>-->
+
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+  <!-- Include TinyMCE script -->
+  <!--<script src="https://cdn.tiny.cloud/1/e1r94crm0f2nvxd5v3j0wbitu9php8gq7uhpfxgpd3wcnfqh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
+  <script src="/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 <script>
+
+//let path = '{{pathque}}';
     tinymce.init({
-        selector: '#question',
+        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5',
+        external_plugins: {'mathjax': '/js/tinymce/plugins/tinymce-mathjax/plugin.js'},
+        plugins:'autolink,lists,media,mathjax,preview,code,spellchecker, image,emoticons',
+        toolbar: 'mathjax , wordcount',
+        mathjax: { lib: '/js/mathjax-tex/tex-mml-chtml.js'},
+         setup: function (editor) {
+            editor.on('change', function () {
+              let content = editor.getBody();
+              console.log('hi '+JSON.stringify(content));
+            });
+
+            editor.on('init', function () {
+              
+            });
+
+          },
+          images_upload_url: '/questions/upload',
+          images_upload_base_path: '',
+          relative_urls: false,
+          file_picker_types: 'image', // Specify that we want to open the image picker
+          file_picker_callback: function (cb, value, meta) {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            input.onchange = function () {
+              const file = input.files[0];
+              const reader = new FileReader();
+              reader.onload = function () {
+                cb(reader.result, { alt: file.name });
+              };
+              reader.readAsDataURL(file);
+            };
+
+            input.click();
+          }
     });
+    function getTextContent() {
+      // Get the TinyMCE editor instance
+      var editor = tinymce.get('question');
+
+      // Check if the editor instance is available
+      if (editor) {
+        // Get the content from the editor
+        var content = editor.getContent();
+
+        // Display the content in a div
+        document.getElementById('outputDiv').innerText = content;
+      } else {
+        console.error('TinyMCE editor not found.');
+      }
+    }
 </script>
 <style>
 .searchbox {
@@ -309,19 +374,41 @@ input.check-toggle-round-flat:checked + label:after {
 
 
     
-                    <div class="form-group mb-4" style="display:none;">
+                    <div class="form-group mb-4 " >
                         <label for="descritpion-1">Your question</label>
-                        <textarea class="form-control" name="question" id="question" placeholder="question" rows="12"></textarea>
+                        <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
                     </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 1</label>
+                        <textarea class="form-control latex" name="answerOne" id="answer-1" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 2</label>
+                        <textarea class="form-control latex" name="answerTwo" id="answer-2" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 3</label>
+                        <textarea class="form-control latex" name="answerThree" id="answer-3" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 4</label>
+                        <textarea class="form-control latex" name="answerFour" id="answer-4" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                    </div>
+                    <div class="form-group mb-4 " >
+                        <label for="descritpion-1">Answer 5</label>
+                        <textarea class="form-control latex" name="answerFive" id="answer-5" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                    </div>
+                     <button onclick="getTextContent()">Get Text Content</button>
+  <div id="outputDiv"></div>
                  <div class="custom-file mb-4 form-group">
  <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
-                    <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" >
                     <label class="custom-file-label" for="validatedCustomFile">choose the question's picture</label>
                     {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
                 </div>
 
                 <div class="custom-file mb-4">
-                        <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" required>
+                        <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" >
                         <label class="custom-file-label" for="validatedCustomFileAns">choose the answer's picture</label>
                         {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
                     </div>    
@@ -399,7 +486,7 @@ input.check-toggle-round-flat:checked + label:after {
 <br><br>
 <div class="form-group mb-4">
                     <label for="descritpion-2">Year</label>
-                    <input type="text" name="queyear" class="form-control" id="queyear">
+                    <input type="text" name="queyear" class="form-control" id="queyear" required>
                     
 </div>
 <div class='form-field'>
@@ -436,6 +523,17 @@ input.check-toggle-round-flat:checked + label:after {
     </label>
     <label class="creative-checkbox halo-bg">
         No <input type="radio" value="2" name="showAns" ><i></i>
+    </label>
+  </div><br><br><br>
+
+ <div class='form-field'>
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Five</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        Yes <input type="radio" value="1" name="showFive" >
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        No <input type="radio" value="2" name="showFive" checked><i></i>
     </label>
   </div><br><br><br>
 
