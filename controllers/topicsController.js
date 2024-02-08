@@ -10,7 +10,6 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const cheerio = require('cheerio')
 const dropdownOptions = ['Option 1', 'Option 2', 'Option 3']
-const cheerio = require('cheerio')
 // handlebars.registerHelper('splitCommaSeparated', function (input) {
 //     return input.split(',').map(item => item.trim());
 // });
