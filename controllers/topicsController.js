@@ -10,6 +10,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const cheerio = require('cheerio')
 const dropdownOptions = ['Option 1', 'Option 2', 'Option 3']
+const cheerio = require('cheerio')
 // handlebars.registerHelper('splitCommaSeparated', function (input) {
 //     return input.split(',').map(item => item.trim());
 // });
@@ -23,7 +24,26 @@ const storage = multer.diskStorage({
 	}
 })
 exports.upload = multer({ storage: storage })
+function removeHtmlAndGetSlug(htmlContent) {
+  // Load the HTML content into Cheerio
+  const $ = cheerio.load(htmlContent);
 
+  // Extract text content from HTML
+  const textContent = $('body').text();
+
+  // Generate slug from the text content
+  const slug = generateSlug(textContent);
+
+  return slug;
+}
+
+function generateSlug(inputString) {
+  return inputString
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .slice(0, 200);
+}
 //handling routes functions
 exports.getAllTopics = async (req, res, next) => {
 	const input = {
@@ -232,6 +252,7 @@ exports.handleCreateQuestion = async (req, res, next) => {
 					imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
 					topic: topicId,
 					video:video ?? "no-video",
+					slugText : removeHtmlAndGetSlug(question),
 					quetype: quetype,
 					examtype:examtype,
 					queshift: queshift,
