@@ -20,63 +20,7 @@
   <script src="/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
 
-<script>
-
-//let path = '{{pathque}}';
-    tinymce.init({
-        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5',
-        external_plugins: {'mathjax': '/js/tinymce/plugins/tinymce-mathjax/plugin.js'},
-        plugins:'autolink,lists,media,mathjax,preview,code,spellchecker, image,emoticons',
-        toolbar: 'mathjax , wordcount',
-        mathjax: { lib: '/js/mathjax-tex/tex-mml-chtml.js'},
-         setup: function (editor) {
-            editor.on('change', function () {
-              let content = editor.getBody();
-              console.log('hi '+JSON.stringify(content));
-            });
-
-            editor.on('init', function () {
-              
-            });
-
-          },
-          images_upload_url: '/questions/upload',
-          images_upload_base_path: '',
-          relative_urls: false,
-          file_picker_types: 'image', // Specify that we want to open the image picker
-          file_picker_callback: function (cb, value, meta) {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-
-            input.onchange = function () {
-              const file = input.files[0];
-              const reader = new FileReader();
-              reader.onload = function () {
-                cb(reader.result, { alt: file.name });
-              };
-              reader.readAsDataURL(file);
-            };
-
-            input.click();
-          }
-    });
-    function getTextContent() {
-      // Get the TinyMCE editor instance
-      var editor = tinymce.get('question');
-
-      // Check if the editor instance is available
-      if (editor) {
-        // Get the content from the editor
-        var content = editor.getContent();
-
-        // Display the content in a div
-        document.getElementById('outputDiv').innerText = content;
-      } else {
-        console.error('TinyMCE editor not found.');
-      }
-    }
-</script>
+<script src="/js/onPage.js" referrerpolicy="origin"></script>
 <style>
 .searchbox {
     border:1px solid #456879;
