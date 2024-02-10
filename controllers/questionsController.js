@@ -30,7 +30,7 @@ function removeHtmlAndGetSlug(htmlContent) {
   const $ = cheerio.load(htmlContent);
 
   // Extract text content from HTML
-  const textContent = $('body').text();
+  const textContent = $.text();
 
   // Generate slug from the text content
   const slug = generateSlug(textContent);
