@@ -7,15 +7,29 @@ tinymce.init({
          setup: function (editor) {
             editor.on('change', function () {
               let content = editor.getBody();
-              console.log('hi '+JSON.stringify(content));
+              //console.log('hi '+JSON.stringify(content));
             });
 
             editor.on('init', function () {
               
             });
-
+            editor.on('paste', function (e, cb) {
+                var items = (e.clipboardData || e.originalEvent.clipboardData).items;
+                for (var index in items) {
+                    var item = items[index];
+                    if (item.kind === 'file') {
+                        var file = item.getAsFile(); // Get the file object
+                        var reader = new FileReader();
+                        reader.onload = function (event) {
+                            // Assuming `cb` is defined somewhere to handle the result
+                            cb(reader.result, { alt: file.name });
+                        };
+                        reader.readAsDataURL(file); // Read the file as data URL
+                    }
+                }
+            });
           },
-          images_upload_url: '/questions/upload',
+          images_upload_url: '/uploads/upload',
           images_upload_base_path: '',
           relative_urls: false,
           file_picker_types: 'image', // Specify that we want to open the image picker
