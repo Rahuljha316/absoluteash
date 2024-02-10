@@ -23,7 +23,7 @@ exports.uploadImage = async (req, res, next) =>{
 	const uploadedFile = req.file.filename;
 	console.log('hello - '+process.env.DB_HOST);
   if (uploadedFile) {
-    const filePath = 'http://localhost:3000/images/topics-question/'+ uploadedFile;
+    const filePath = 'http://16.171.160.84:2222/images/topics-question/'+ uploadedFile;
     res.json({ location: filePath , filename: uploadedFile});
   } else {
     res.status(500).json({ error: 'Failed to upload image' });
