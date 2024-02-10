@@ -4,14 +4,14 @@ tinymce.init({
         plugins:'autolink,lists,media,mathjax,preview,code,spellchecker, image,emoticons',
         toolbar: 'mathjax , wordcount',
         mathjax: { lib: '/js/mathjax-tex/tex-mml-chtml.js'},
-         setup: function (editor) {
+        setup: function (editor) {
             editor.on('change', function () {
               let content = editor.getBody();
               //console.log('hi '+JSON.stringify(content));
             });
-
+            editor.settings.images_upload_handler = false;
             editor.on('init', function () {
-              
+              editor.settings.images_upload_handler = function () { return false; };
             });
             editor.on('paste', function (e, cb) {
                 var items = (e.clipboardData || e.originalEvent.clipboardData).items;
@@ -21,6 +21,8 @@ tinymce.init({
                         var file = item.getAsFile(); // Get the file object
                         var reader = new FileReader();
                         reader.onload = function (event) {
+                          uploadImage(file, editor);
+                          
                             // Assuming `cb` is defined somewhere to handle the result
                             cb(reader.result, { alt: file.name });
                         };
@@ -28,12 +30,12 @@ tinymce.init({
                     }
                 }
             });
-          },
-          images_upload_url: '/uploads/upload',
-          images_upload_base_path: '',
-          relative_urls: false,
-          file_picker_types: 'image', // Specify that we want to open the image picker
-          file_picker_callback: function (cb, value, meta) {
+        },
+        images_upload_url: '/uploads/upload',
+        images_upload_base_path: '',
+        relative_urls: false,
+        file_picker_types: 'image', // Specify that we want to open the image picker
+        file_picker_callback: function (cb, value, meta) {
             const input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'image/*');
@@ -48,8 +50,23 @@ tinymce.init({
             };
 
             input.click();
-          }
+        }
     });
+    function uploadImage(file, editor) {
+      // Create a FormData object and append the image file
+      const formData = new FormData();
+      formData.append('file', file);
+
+      // Upload the image using TinyMCE API
+      editor.uploadImages(function(success) {
+        // Handle successful upload
+        const imageUrl = success[0].url;
+        console.log('Image uploaded:', imageUrl);
+      }, function(failure) {
+        // Handle upload failure
+        console.error('Image upload failed:', failure);
+      }, formData);
+    }
     function getTextContent() {
       // Get the TinyMCE editor instance
       var editor = tinymce.get('question');
