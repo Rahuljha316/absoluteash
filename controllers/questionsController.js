@@ -116,6 +116,7 @@ exports.getCreateAnswerPage = async (req, res, next) => {
 }
 exports.uploadImage = async (req, res, next) =>{
 	const uploadedFile = req.file.filename;
+	console.log('hello - '+process.env.DB_HOST);
   if (uploadedFile) {
     const filePath = 'http://localhost:3000/images/topics-images/'+ uploadedFile;
     res.json({ location: filePath , filename: uploadedFile});

@@ -1,4 +1,6 @@
+require('dotenv').config();
 const createError = require("http-errors")
+const bodyParser = require("body-parser")
 const express = require("express")
 const path = require("path")
 const cookieParser = require("cookie-parser")
@@ -17,6 +19,7 @@ const usersRoutes = require("./routes/usersRoutes")
 const questionsRoutes = require("./routes/questionsRoutes")
 const answersRoutes = require("./routes/answersRoutes")
 const topicsRoutes = require("./routes/topicsRoutes")
+const uploadsRoutes = require("./routes/uploadsRoutes")
 
 const app = express()
 //database setup
@@ -74,6 +77,8 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(flash())
 app.use(
 	session({
@@ -94,6 +99,7 @@ app.use("/users", usersRoutes)
 app.use("/questions", questionsRoutes)
 app.use("/answers", answersRoutes)
 app.use("/topics", topicsRoutes)
+app.use("/uploads", uploadsRoutes)
 
 app.get("/", (req, res, next) => {
 	res.redirect("/topics")
