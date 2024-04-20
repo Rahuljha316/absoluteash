@@ -412,13 +412,13 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
    
     
 </div>
-{{#if topic.numericanswer }}
-<div class='form-field numerical-option' style="margin-top:8px;" >
+
+<div class='form-field numerical-option' style="margin-top:8px;{{#if (eq "4" topic.quetype) }} display:block;{{else}}display:none;{{/if}}" >
                         <label for="descritpion-2">Answer(Accepts values like 12, 13.56)</label>
                                         <input type="text" name="numericanswer" value="{{topic.numericanswer}}" class="form-control" id="numberInput">
                         <br><br>
 </div> 
-{{/if}}   
+   
 {{#if topic.correctanswer }}
   <div class='form-field' style="margin-top:8px;">
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
