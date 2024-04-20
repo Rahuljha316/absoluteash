@@ -315,171 +315,181 @@ input.check-toggle-round-flat:checked + label:after {
                         {{/each}}
                     {{/if}}
 
+                        <div class='form-field'>
+                            <div class='form-field' style="margin-top:8px;">
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Single <input type="radio" value="1" onclick="morethan(this)" name="quetype">
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Multiple <input type="radio" value="2" onclick="morethan(this)" name="quetype"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Subjective <input type="radio" value="3" onclick="morethan(this)" name="quetype"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Numerical <input type="radio" value="4" onclick="morethan(this)" name="quetype"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Integer <input type="radio" value="5" onclick="morethan(this)" name="quetype"><i></i>
+                            </label> 
+                          </div>
+                          <br><br>
+                          </div>
 
+                            
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Your question</label>
+                                <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="normal-option">
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Option A</label>
+                                <textarea class="form-control latex" name="answerOne" id="answer-1" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Option B</label>
+                                <textarea class="form-control latex" name="answerTwo" id="answer-2" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Option C</label>
+                                <textarea class="form-control latex" name="answerThree" id="answer-3" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Option D</label>
+                                <textarea class="form-control latex" name="answerFour" id="answer-4" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Option E</label>
+                                <textarea class="form-control latex" name="answerFive" id="answer-5" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Answer Explanation</label>
+                                <textarea class="form-control latex" name="answerExplanation" id="answer-explain" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class='form-field integer-option' style="margin-top:8px;" id="correct-answer">
+                              <label for="descritpion-2">Correct Answer</label><br>
+                                {{#each ioptions}}
+                                    <label class="creative-checkbox halo-bg">
+                                        {{this}} <input type="radio" value="{{this}}" name="integeranswer"><i></i>
+                                    </label>
+                                {{/each}}
+                            </div>
+                        <div class="custom-file mb-4 form-group">
+                             <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
+                            <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" >
+                            <label class="custom-file-label" for="validatedCustomFile">choose the question's picture</label>
+                            {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
+                        </div>
 
-    
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Your question</label>
-                        <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 1</label>
-                        <textarea class="form-control latex" name="answerOne" id="answer-1" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 2</label>
-                        <textarea class="form-control latex" name="answerTwo" id="answer-2" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 3</label>
-                        <textarea class="form-control latex" name="answerThree" id="answer-3" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 4</label>
-                        <textarea class="form-control latex" name="answerFour" id="answer-4" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 5</label>
-                        <textarea class="form-control latex" name="answerFive" id="answer-5" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
-                    </div>
-                     <button onclick="getTextContent()">Get Text Content</button>
-  <div id="outputDiv"></div>
-                 <div class="custom-file mb-4 form-group">
- <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
-                    <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" >
-                    <label class="custom-file-label" for="validatedCustomFile">choose the question's picture</label>
-                    {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
-                </div>
+                        <div class="custom-file mb-4">
+                                <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" >
+                                <label class="custom-file-label" for="validatedCustomFileAns">choose the answer's picture</label>
+                                {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
+                            </div>    
+        	           <div class="form-group mb-4">
+                            <label for="descritpion-2">Video solution Link</label>
+                            <input type="text" name="video" class="form-control" id="concept">
+                            
+                        </div>
+                        <div class='form-field'>
+                          <label for='sizeFilter-2'>Topic Codes</label>
+                            <select id="listBox1" name="topiccode" class='form-control'>
 
-                <div class="custom-file mb-4">
-                        <input type="file" name="imageAns" class="custom-file-input" id="validatedCustomFileAns" >
-                        <label class="custom-file-label" for="validatedCustomFileAns">choose the answer's picture</label>
-                        {{!-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
-                    </div>    
-	           <div class="form-group mb-4">
-                    <label for="descritpion-2">Video solution Link</label>
-                    <input type="text" name="video" class="form-control" id="concept">
-                    
-                </div>
-                <div class='form-field'>
-  <label for='sizeFilter-2'>Topic Codes</label>
-    <select id="listBox1" name="topiccode" class='form-control'>
+                            <option value=""></option>
+                              {{#each optionp}}
+                                <option value="{{this.PHY110101}}">{{this.PHY110101}} - {{this.General_Physics}}- {{this.General_Concepts}}</option>
+                              {{/each}}
+                            </select>
+                           
+                            
+                        </div><br>
+                       
+          
+                      
+                      <div class='form-field numerical-option' style="margin-top:8px;" >
+                        <label for="descritpion-2">Answer(Accepts values like 12, 13.56)</label>
+                                        <input type="text" name="numericanswer" class="form-control" id="numberInput">
+                        <br><br>
+                      </div>
+                      
+                      <div class='form-field normal-option' style="margin-top:8px;" id="correct-answer">
+                        <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
+                        <label class="creative-checkbox halo-bg">
+                             A <input type="radio" value="A" name="correctanswer">
+                            <i></i>
+                        </label>
+                        <label class="creative-checkbox halo-bg">
+                             B <input type="radio" value="B" name="correctanswer"><i></i>
+                        </label>
+                        <label class="creative-checkbox halo-bg">
+                             C <input type="radio" value="C" name="correctanswer"><i></i>
+                        </label> 
+                        <label class="creative-checkbox halo-bg">
+                            D <input type="radio" value="D" name="correctanswer"><i></i>
+                        </label>
+                        <br><br>
+                      </div>
+                    <div class='form-field'>
+                        <label for='sizeFilter-3' style="float:left;margin-top:8px;">Exam Type</label><br><br>
+                        <label class="creative-checkbox halo-bg">
+                            IIT Mains <input type="radio" value="1" name="examtype">
+                            <i></i>
+                        </label>
+                        <label class="creative-checkbox halo-bg">
+                            IIT Advanced <input type="radio" value="2" name="examtype">
+                            <i></i>
+                        </label>
+                        <label class="creative-checkbox halo-bg">
+                            NEET <input type="radio" value="3" name="examtype"><i></i>
+                        </label>
+                        <label class="creative-checkbox halo-bg">
+                            Olympiad <input type="radio" value="4" name="examtype"><i></i>
+                        </label> 
+                      </div>
+                    <br><br>
+                        <div class="form-group mb-4">
+                                            <label for="descritpion-2">Year</label>
+                                            <input type="text" name="queyear" class="form-control" id="queyear" required>
+                                            
+                        </div>
+                          <div class='form-field'>
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Difficulty Level</label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Level 1 <input type="radio" value="1" name="difficultylevel">
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Level 2 <input type="radio" value="2" name="difficultylevel"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Level 3 <input type="radio" value="3" name="difficultylevel"><i></i>
+                            </label>
+                          </div><br><br><br>
 
-    <option value=""></option>
-      {{#each optionp}}
-        <option value="{{this.PHY110101}}">{{this.PHY110101}} - {{this.General_Physics}}- {{this.General_Concepts}}</option>
-      {{/each}}
-    </select>
-   
-    
-</div>
-                <div class='form-field'>
-    <div class='form-field' style="margin-top:8px;">
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Single <input type="radio" value="1" onclick="morethan(this)" name="quetype">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Multiple <input type="radio" value="2" onclick="morethan(this)" name="quetype"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Subjective <input type="radio" value="3" onclick="morethan(this)" name="quetype"><i></i>
-    </label> 
-  </div>
-  <br><br>
-  </div>
+                          <div class='form-field'>
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Answer</label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Yes <input type="radio" value="1" name="showAns" checked>
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                No <input type="radio" value="2" name="showAns" ><i></i>
+                            </label>
+                          </div><br><br><br>
 
-  <div class='form-field' style="margin-top:8px;">
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
-    <label class="creative-checkbox halo-bg">
-         A <input type="radio" value="A" name="correctanswer">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-         B <input type="radio" value="B" name="correctanswer"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-         C <input type="radio" value="C" name="correctanswer"><i></i>
-    </label> 
-    <label class="creative-checkbox halo-bg">
-        D <input type="radio" value="D" name="correctanswer"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        E <input type="radio" value="E" name="correctanswer"><i></i>
-    </label>
-  </div>
-  <br><br>
-<div class='form-field'>
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Exam Type</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        IIT Mains <input type="radio" value="1" name="examtype">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        IIT Advanced <input type="radio" value="2" name="examtype">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        NEET <input type="radio" value="3" name="examtype"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        JSO <input type="radio" value="4" name="examtype"><i></i>
-    </label> 
-  </div>
-<br><br>
-<div class="form-group mb-4">
-                    <label for="descritpion-2">Year</label>
-                    <input type="text" name="queyear" class="form-control" id="queyear" required>
-                    
-</div>
-<div class='form-field'>
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Shift</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Shift 1 <input type="radio" value="1" name="queshift">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Shift 2 <input type="radio" value="2" name="queshift">
-        <i></i>
-    </label>
-  </div>
-<br><br>
-  <div class='form-field'>
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Difficulty Level</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Level 1 <input type="radio" value="1" name="difficultylevel">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Level 2 <input type="radio" value="2" name="difficultylevel"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Level 3 <input type="radio" value="3" name="difficultylevel"><i></i>
-    </label>
-  </div><br><br><br>
-
-  <div class='form-field'>
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Answer</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Yes <input type="radio" value="1" name="showAns" checked>
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        No <input type="radio" value="2" name="showAns" ><i></i>
-    </label>
-  </div><br><br><br>
-
- <div class='form-field'>
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Five</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Yes <input type="radio" value="1" name="showFive" >
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        No <input type="radio" value="2" name="showFive" checked><i></i>
-    </label>
-  </div><br><br><br>
+                         <div class='form-field normal-option' id='show-five'>
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Show Five</label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Yes <input type="radio" value="1" name="showFive" >
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                No <input type="radio" value="2" name="showFive" checked><i></i>
+                            </label>
+                          </div><br><br><br>
 
                     <button class="btn btn-block text-capitalize" 
                         style="background-color: #324f6c;
@@ -662,10 +672,46 @@ input.check-toggle-round-flat:checked + label:after {
     if (radioInput == 2) {
         state = "checkbox";
     }
+    if (radioInput == 4) {
+        $(".numerical-option").show();
+        $(".integer-option").hide();
+        $(".normal-option").hide();
+    }else if (radioInput == 5) {
+        $(".integer-option").show();
+        $(".normal-option").hide();
+        $(".numerical-option").hide();
+    }else if (radioInput == 3) {
+        $(".integer-option").hide();
+        $(".normal-option").hide();
+        $(".numerical-option").hide();
+    }else{
+        $(".normal-option").show();
+        $(".integer-option").hide();
+        $(".numerical-option").hide();
+    }
     // get all by name and change state
     var radios = document.getElementsByName('correctanswer');
     for (i = 0; i < radios.length; i++) {
         radios[i].type = state;
     }
 }
+
+document.getElementById('numberInput').addEventListener('input', function() {
+    // Get the input value
+    let value = this.value;
+
+    // Remove any non-digit or non-decimal characters
+    value = value.replace(/[^0-9.]/g, '');
+
+    // Update the input value
+    this.value = value;
+});
+</script>
+<script>
+    $(document).ready(function(){
+        // Hide the specified class
+        $(".normal-option").hide();
+        $(".integer-option").hide();
+        $(".numerical-option").hide();
+    });
 </script>

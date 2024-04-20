@@ -24,6 +24,7 @@ const cheerio = require('cheerio')
 // });
 // Use path.join to construct the correct path
 const mathjaxPluginRelativePath = '';
+const integerOptions = ['0','1', '2', '3','4','5','6','7','8','9']
 
 function removeHtmlAndGetSlug(htmlContent) {
   // Load the HTML content into Cheerio
@@ -218,8 +219,9 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive,queId } = req.body
+				const { question,video,quetype,examtype,queshift,answerExplanation,integeranswer,numericanswer,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive,queId } = req.body
 				const connectedUser = req.user
+				
 				//console.log('Request body '+JSON.stringify(req.body));
 				// const newQuestion = await Question.findByIdAndUpdate(queId,{
 				// 	imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
@@ -242,37 +244,100 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 				// 	difficultylevel:difficultylevel,
 				// 	topiccode:topiccode,
 				// })
-const filter = { _id: queId }; // Replace with the actual document ID
-  const update = { $set: {
-					imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
-					imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
-					//topic: topicId,
-					video:video ?? "no-video",
-					quetype: quetype,
-					examtype:examtype,
-					queshift: queshift,
-					slugText : removeHtmlAndGetSlug(question),
-					queyear:queyear,
-					showAns:showAns,
-					answerOne:answerOne,
-					answerTwo: answerTwo,
-					answerThree:answerThree,
-					answerFour:answerFour,
-					question:question,
-					answerFive:answerFive,
-					showFive : showFive,
-					correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
-					difficultylevel:difficultylevel,
-					topiccode:topiccode,
-				} }; // Replace with the field you want to update
-await Question.updateOne(filter, update, (err, result) => {
-    if (err) {
-      console.error('Error updating document:', err);
-      return;
-    }
+				    const filter = { _id: queId }; // Replace with the actual document ID
+				    if(quetype == '1' || quetype == '2' || quetype == '3'){
+					const update2 = { $set: {
+							imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+							imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+							//topic: topicId,
+							video:video ?? "no-video",
+							quetype: quetype,
+							examtype:examtype,
+							queshift: queshift,
+							slugText : removeHtmlAndGetSlug(question),
+							queyear:queyear,
+							showAns:showAns,
+							answerOne:answerOne,
+							answerTwo: answerTwo,
+							answerThree:answerThree,
+							answerFour:answerFour,
+							question:question,
+							answerFive:answerFive,
+							showFive : showFive,
+							correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+							difficultylevel:difficultylevel,
+							topiccode:topiccode,
+						} }; // Replace with the field you want to update
+						await Question.updateOne(filter, update2, (err, result) => {
+						    if (err) {
+						      console.error('Error updating document:', err);
+						      return;
+						    }
 
-    console.log('Document updated successfully:', result);
-});
+						    console.log('Document updated successfully:', result);
+						});
+					}
+					if(quetype == '4' ){
+						console.log('Request quetype '+quetype);
+						const update1 = { $set: {
+							imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+							imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+							//topic: topicId,
+							video:video ?? "no-video",
+							quetype: quetype,
+							examtype:examtype,
+							queshift: queshift,
+							slugText : removeHtmlAndGetSlug(question),
+							queyear:queyear,
+							answerExplanation:answerExplanation,
+							showAns:showAns,
+							numericanswer:numericanswer,
+							question:question,
+							showFive : showFive,
+							correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+							difficultylevel:difficultylevel,
+							topiccode:topiccode,
+						} }; // Replace with the field you want to update
+						await Question.updateOne(filter, update1, (err, result) => {
+						    if (err) {
+						      console.error('Error updating document:', err);
+						      return;
+						    }
+
+						    console.log('Document updated successfully:', result);
+						});
+					}
+					if(quetype == '5' ){
+						const update = { $set: {
+							imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+							imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+							//topic: topicId,
+							video:video ?? "no-video",
+							quetype: quetype,
+							examtype:examtype,
+							queshift: queshift,
+							slugText : removeHtmlAndGetSlug(question),
+							queyear:queyear,
+							answerExplanation:answerExplanation,
+							showAns:showAns,
+							integeranswer:integeranswer,
+							question:question,
+							answerFive:answerFive,
+							showFive : showFive,
+							correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+							difficultylevel:difficultylevel,
+							topiccode:topiccode,
+						} }; // Replace with the field you want to update
+						await Question.updateOne(filter, update, (err, result) => {
+						    if (err) {
+						      console.error('Error updating document:', err);
+						      return;
+						    }
+
+						    console.log('Document updated successfully:', result);
+						});
+					}	
+
 				//add this question to topic's questions as well as user's questions
 				
 				input.successMessage = "question successfull updated"
@@ -352,6 +417,7 @@ exports.getAskQuestionPage = async (req, res, next) => {
 				  //input.textp = textQues;
 				  //input.pathque = mathjaxPluginRelativePath;
 				  input.optionp = topicCodes;
+				  input.ioptions = integerOptions;
 			 res.render("edit-question", input);
 			console.log('Topic Data'+topic);
 		

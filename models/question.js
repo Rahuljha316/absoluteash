@@ -27,11 +27,11 @@ const questionSchema = mongoose.Schema({
 	},
 	correctanswer: {
 		type: String,
-		required: true
+		required: false
 	},
 	quetype: {
 		type: String,
-		required: true
+		required: false
 	},
 	examtype: {
 		type: String,
@@ -39,7 +39,7 @@ const questionSchema = mongoose.Schema({
 	},
 	difficultylevel: {
 		type: String,
-		required: true
+		required: false
 	},
 	queyear: {
 		type: String,
@@ -47,7 +47,7 @@ const questionSchema = mongoose.Schema({
 	},
 	queshift: {
 		type: String,
-		required: true
+		required: false
 	},
 	showAns: {
 		type: String,
@@ -55,15 +55,15 @@ const questionSchema = mongoose.Schema({
 	},
 	showFive: {
 		type: String,
-		required: true
+		required: false
 	},
 	answerOne: {
 		type: String,
-		required: true
+		required: false
 	},
 	answerTwo: {
 		type: String,
-		required: true
+		required: false
 	},
 	slugText: {
 		type: String,
@@ -71,20 +71,32 @@ const questionSchema = mongoose.Schema({
 	},
 	answerThree: {
 		type: String,
-		required: true
+		required: false
 	},
 	answerFour: {
 		type: String,
-		required: true
+		required: false
 	},
 	answerFive: {
 		type: String,
-		required: true
+		required: false
 	},
 	creationDate: {
 		type: Date,
 		required: true,
 		default: Date.now
+	},
+	numericanswer: {
+		type: String,
+		required: false
+	},
+	integeranswer: {
+		type: String,
+		required: false
+	},
+	answerExplanation: {
+		type: String,
+		required: false
 	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,

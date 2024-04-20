@@ -10,6 +10,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const cheerio = require('cheerio')
 const dropdownOptions = ['Option 1', 'Option 2', 'Option 3']
+const integerOptions = ['0','1', '2', '3','4','5','6','7','8','9']
 // handlebars.registerHelper('splitCommaSeparated', function (input) {
 //     return input.split(',').map(item => item.trim());
 // });
@@ -242,55 +243,151 @@ exports.handleCreateQuestion = async (req, res, next) => {
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive } = req.body
+				const { question,video,quetype,examtype,answerExplanation,integeranswer,numericanswer,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive } = req.body
 				const connectedUser = req.user
-				const newQuestion = await Question.create({
-					content: 'QUESTION-'+latestRecordValNum,
-					user: connectedUser._id,
-					imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
-					imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
-					topic: topicId,
-					video:video ?? "no-video",
-					slugText : removeHtmlAndGetSlug(question),
-					quetype: quetype,
-					examtype:examtype,
-					queshift: queshift,
-					queyear:queyear,
-					showAns:showAns,
-					question:question,
-					answerOne:answerOne,
-					answerTwo: answerTwo,
-					answerThree:answerThree,
-					answerFour:answerFour,
-					answerFive:answerFive,
-					showFive : showFive,
-					correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
-					difficultylevel:difficultylevel,
-					topiccode:topiccode,
-				})
+				if(quetype == '1' || quetype == '2' || quetype == '3'){
+					const newQuestion = await Question.create({
+						content: 'QUESTION-'+latestRecordValNum,
+						user: connectedUser._id,
+						imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+						imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+						topic: topicId,
+						video:video ?? "no-video",
+						slugText : removeHtmlAndGetSlug(question),
+						quetype: quetype,
+						examtype:examtype,
+						queshift: queshift,
+						queyear:queyear,
+						showAns:showAns,
+						question:question,
+						answerOne:answerOne,
+						answerTwo: answerTwo,
+						answerThree:answerThree,
+						answerExplanation:answerExplanation,
+						answerFour:answerFour,
+						answerFive:answerFive,
+						showFive : showFive,
+						correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+						difficultylevel:difficultylevel,
+						topiccode:topiccode,
+					})
+					//add this question to topic's questions as well as user's questions
+					const updatedUser = await User.findByIdAndUpdate(
+						connectedUser._id,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
 
-				//add this question to topic's questions as well as user's questions
-				const updatedUser = await User.findByIdAndUpdate(
-					connectedUser._id,
-					{
-						$push: { questions: newQuestion._id }
-					},
-					{
-						new: true,
-						useFindAndModify: false
-					}
-				)
+					const updatedTopic = await Topic.findByIdAndUpdate(
+						topicId,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
+				}
+				if(quetype == '4' ){
+					console.log('Hello text ----'+ quetype);
+					const newQuestion = await Question.create({
+						content: 'QUESTION-'+latestRecordValNum,
+						user: connectedUser._id,
+						imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+						imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+						topic: topicId,
+						video:video ?? "no-video",
+						slugText : removeHtmlAndGetSlug(question),
+						quetype: quetype,
+						examtype:examtype,
+						queshift: queshift,
+						queyear:queyear,
+						answerExplanation:answerExplanation,
+						showAns:showAns,
+						numericanswer:numericanswer,
+						question:question,
+						showFive : showFive,
+						correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+						difficultylevel:difficultylevel,
+						topiccode:topiccode,
+					})
+					//add this question to topic's questions as well as user's questions
+					const updatedUser = await User.findByIdAndUpdate(
+						connectedUser._id,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
 
-				const updatedTopic = await Topic.findByIdAndUpdate(
-					topicId,
-					{
-						$push: { questions: newQuestion._id }
-					},
-					{
-						new: true,
-						useFindAndModify: false
-					}
-				)
+					const updatedTopic = await Topic.findByIdAndUpdate(
+						topicId,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
+				}
+				if(quetype == '5' ){
+					const newQuestion = await Question.create({
+						content: 'QUESTION-'+latestRecordValNum,
+						user: connectedUser._id,
+						imageName: quesImage ? req.files['image'][0].filename : "default-topic-image.png",
+						imageForAnsName: ansImage ? req.files['imageAns'][0].filename : "default-topic-image.png",
+						topic: topicId,
+						video:video ?? "no-video",
+						slugText : removeHtmlAndGetSlug(question),
+						quetype: quetype,
+						examtype:examtype,
+						queshift: queshift,
+						queyear:queyear,
+						answerExplanation:answerExplanation,
+						showAns:showAns,
+						integeranswer:integeranswer,
+						question:question,
+						showFive : showFive,
+						correctanswer: Array.isArray(correctanswer) ? correctanswer.join(',') : correctanswer,
+						difficultylevel:difficultylevel,
+						topiccode:topiccode,
+					})
+					//add this question to topic's questions as well as user's questions
+					const updatedUser = await User.findByIdAndUpdate(
+						connectedUser._id,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
+
+					const updatedTopic = await Topic.findByIdAndUpdate(
+						topicId,
+						{
+							$push: { questions: newQuestion._id }
+						},
+						{
+							new: true,
+							useFindAndModify: false
+						}
+					)
+				}
+				
+
+				
 				input.successMessage = "question successfull created"
 			}
 
@@ -326,6 +423,7 @@ exports.getAskQuestionPage = async (req, res, next) => {
 		if (topic) {
 			input.topic = topic;
 			input.optionp = topicCode;
+			input.ioptions = integerOptions;
 		}
 		res.render("ask-question", input)
 	} catch (error) {

@@ -314,6 +314,28 @@ input.check-toggle-round-flat:checked + label:after {
                         {{/each}}
                     {{/if}}
 
+<div class='form-field'>
+    <div class='form-field' style="margin-top:8px;">
+    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
+    <label class="creative-checkbox halo-bg">
+        Single <input type="radio" value="1" onclick="morethan(this)" {{#if (eq "1" topic.quetype) }} checked  {{/if}} name="quetype">
+        <i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Multiple <input type="radio" value="2" onclick="morethan(this)" {{#if (eq "2" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Subjective <input type="radio" value="3" onclick="morethan(this)" {{#if (eq "3" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
+    </label> 
+    <label class="creative-checkbox halo-bg">
+        Numerical <input type="radio" value="4" onclick="morethan(this)" {{#if (eq "4" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
+    </label>
+    <label class="creative-checkbox halo-bg">
+        Integer <input type="radio" value="5" onclick="morethan(this)" {{#if (eq "5" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
+    </label> 
+  </div>
+  <br><br>
+  </div>
    <!-- \( \[\frac{-vb\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch\( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) bjhjbjbh jbjhbjhbjhbjbj
 \( a^3/2a \) hello one two three nmdlkcnksdcnjdsncj bjhbcjwhbchj wbejhebjhewb 
 \( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj hjsbjahbjahbj hsbjhabjhasjchbd \( 1/ 2a^3 \)
@@ -327,6 +349,7 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
                         <label for="descritpion-1">Your question</label>
                         <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12">{{topic.question}}  </textarea>
                     </div>
+                    <div class="normal-option">
                      <div class="form-group mb-4 " >
                         <label for="descritpion-1">Answer 1</label>
                         <textarea class="form-control latex" name="answerOne" id="answer-1" placeholder="question" rows="12">{{topic.answerOne}}  </textarea>
@@ -343,12 +366,23 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
                         <label for="descritpion-1">Answer 4</label>
                         <textarea class="form-control latex" name="answerFour" id="answer-4" placeholder="question" rows="12">{{topic.answerFour}} </textarea>
                     </div>
-                    <div class="form-group mb-4 " >
-                        <label for="descritpion-1">Answer 5</label>
-                        <textarea class="form-control latex" name="answerFive" id="answer-5" placeholder="question" rows="12">{{topic.answerFive}}  </textarea>
                     </div>
-                     <button onclick="getTextContent()">Get Text Content</button>
-  <div id="outputDiv"></div>
+                     <!--<button onclick="getTextContent()">Get Text Content</button>
+  <div id="outputDiv"></div>-->
+                    <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Answer Explanation</label>
+                                <textarea class="form-control latex" name="answerExplanation" id="answer-explain" placeholder="question" rows="12">{{topic.answerExplanation}} </textarea>
+                    </div>
+                    {{#if topic.integeranswer }}
+                    <div class='form-field integer-option' style="margin-top:8px;" id="correct-answer">
+                              <label for="descritpion-2">Correct Answer</label><br>
+                                {{#each ioptions}}
+                                    <label class="creative-checkbox halo-bg">
+                                        {{this}} <input type="radio" {{#if (eq this topic.integeranswer) }} checked  {{/if}} value="{{this}}" name="integeranswer"><i></i>
+                                    </label>
+                                {{/each}}
+                            </div>
+                    {{/if}}
                  <div class="custom-file mb-4 form-group">
  <label class="custom-file-label" for='sizeFilter-6'>Question Image</label>
                     <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" >
@@ -378,23 +412,14 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
    
     
 </div>
-                <div class='form-field'>
-    <div class='form-field' style="margin-top:8px;">
-    <label for='sizeFilter-3' style="float:left;margin-top:8px;">Question Type</label><br><br>
-    <label class="creative-checkbox halo-bg">
-        Single <input type="radio" value="1" onclick="morethan(this)" {{#if (eq "1" topic.quetype) }} checked  {{/if}} name="quetype">
-        <i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Multiple <input type="radio" value="2" onclick="morethan(this)" {{#if (eq "2" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
-    </label>
-    <label class="creative-checkbox halo-bg">
-        Subjective <input type="radio" value="3" onclick="morethan(this)" {{#if (eq "3" topic.quetype) }} checked  {{/if}} name="quetype"><i></i>
-    </label> 
-  </div>
-  <br><br>
-  </div>
-
+{{#if topic.numericanswer }}
+<div class='form-field numerical-option' style="margin-top:8px;" >
+                        <label for="descritpion-2">Answer(Accepts values like 12, 13.56)</label>
+                                        <input type="text" name="numericanswer" value="{{topic.numericanswer}}" class="form-control" id="numberInput">
+                        <br><br>
+</div> 
+{{/if}}   
+{{#if topic.correctanswer }}
   <div class='form-field' style="margin-top:8px;">
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Correct Answer</label><br><br>
     <label class="creative-checkbox halo-bg">
@@ -415,6 +440,7 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
     </label>
   </div>
   <br><br>
+  {{/if}}
 <div class='form-field'>
     <label for='sizeFilter-3' style="float:left;margin-top:8px;">Exam Type</label><br><br>
     <label class="creative-checkbox halo-bg">
@@ -429,7 +455,7 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
         NEET <input type="radio" value="3" {{#if (eq "3" topic.examtype) }} checked  {{/if}} name="examtype"><i></i>
     </label>
     <label class="creative-checkbox halo-bg">
-        JSO <input type="radio" value="4" {{#if (eq "4" topic.examtype) }} checked  {{/if}} name="examtype"><i></i>
+        Olympiad <input type="radio" value="4" {{#if (eq "4" topic.examtype) }} checked  {{/if}} name="examtype"><i></i>
     </label> 
   </div>
 <br><br>
@@ -510,4 +536,60 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
       textFieldClass: 'searchbox',
       selected: true
   });
+
+function morethan(cbox) {
+    // setup new state
+    var radioInput = $('input[name="quetype"]:checked').val();
+    var state = "radio";
+    if (radioInput == 2) {
+        state = "checkbox";
+    }
+    if (radioInput == 4) {
+        $(".numerical-option").show();
+        $(".integer-option").hide();
+        $(".normal-option").hide();
+    }else if (radioInput == 5) {
+        $(".integer-option").show();
+        $(".normal-option").hide();
+        $(".numerical-option").hide();
+    }else if (radioInput == 3) {
+        $(".integer-option").hide();
+        $(".normal-option").hide();
+        $(".numerical-option").hide();
+    }else{
+        $(".normal-option").show();
+        $(".integer-option").hide();
+        $(".numerical-option").hide();
+    }
+    // get all by name and change state
+    var radios = document.getElementsByName('correctanswer');
+    for (i = 0; i < radios.length; i++) {
+        radios[i].type = state;
+    }
+}
+
+document.getElementById('numberInput').addEventListener('input', function() {
+    // Get the input value
+    let value = this.value;
+
+    // Remove any non-digit or non-decimal characters
+    value = value.replace(/[^0-9.]/g, '');
+
+    // Update the input value
+    this.value = value;
+});
+</script>
+<script>
+    $(document).ready(function(){
+        // Hide the specified class
+        {{#if (eq "4" topic.quetype) }}
+           $(".normal-option").hide();
+           $(".integer-option").hide();
+        {{/if}}
+
+        {{#if (eq "5" topic.quetype) }}
+           $(".normal-option").hide();
+           $(".numerical-option").hide();
+        {{/if}}
+    });
 </script>
