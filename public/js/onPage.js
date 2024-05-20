@@ -1,5 +1,5 @@
 tinymce.init({
-        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5',
+        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5,#answer-explain',
         external_plugins: {'mathjax': '/js/tinymce/plugins/tinymce-mathjax/plugin.js'},
         plugins:'autolink,lists,media,mathjax,preview,code,spellchecker, image,emoticons',
         toolbar: 'mathjax , wordcount',
@@ -9,7 +9,7 @@ tinymce.init({
               let content = editor.getBody();
               //console.log('hi '+JSON.stringify(content));
             });
-            editor.settings.images_upload_handler = false;
+            //editor.settings.images_upload_handler = false;
             editor.on('init', function () {
               editor.settings.images_upload_handler = function () { return false; };
             });
