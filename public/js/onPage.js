@@ -1,5 +1,5 @@
 tinymce.init({
-        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5,#answer-explain',
+        selector: '#question,#answer-1,#answer-2,#answer-3,#answer-4,#answer-5,#answer-explain,#answer-hint',
         external_plugins: {'mathjax': '/js/tinymce/plugins/tinymce-mathjax/plugin.js'},
         plugins:'autolink,lists,media,mathjax,preview,code,spellchecker, image,emoticons',
         toolbar: 'mathjax , wordcount',
@@ -247,3 +247,15 @@ tinymce.init({
         radios[i].type = state;
     }
 }
+        function validateForm() {
+            // Get the content from TinyMCE editor
+            const content = tinymce.get('answer-explain').getContent({ format: 'text' }).trim();
+
+            // Check if the content is empty
+            if (content.length === 0) {
+                alert('Answer Explanation is required!');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }

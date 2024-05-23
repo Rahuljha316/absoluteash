@@ -219,7 +219,7 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,queshift,answerExplanation,integeranswer,numericanswer,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive,queId } = req.body
+				const { question,video,quetype,examtype,queshift,quesubject,answerExplanation,answerHint,integeranswer,numericanswer,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive,queId } = req.body
 				const connectedUser = req.user
 				
 				//console.log('Request body '+JSON.stringify(req.body));
@@ -253,6 +253,8 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 							video:video ?? "no-video",
 							quetype: quetype,
 							examtype:examtype,
+							quesubject: quesubject,
+						    answerHint:answerHint,
 							queshift: queshift,
 							slugText : removeHtmlAndGetSlug(question),
 							queyear:queyear,
@@ -286,6 +288,8 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 							video:video ?? "no-video",
 							quetype: quetype,
 							examtype:examtype,
+							quesubject: quesubject,
+							answerHint:answerHint,
 							queshift: queshift,
 							slugText : removeHtmlAndGetSlug(question),
 							queyear:queyear,
@@ -315,6 +319,8 @@ exports.handleUpdateQuestion = async (req, res, next) => {
 							video:video ?? "no-video",
 							quetype: quetype,
 							examtype:examtype,
+							quesubject: quesubject,
+							answerHint:answerHint,
 							queshift: queshift,
 							slugText : removeHtmlAndGetSlug(question),
 							queyear:queyear,

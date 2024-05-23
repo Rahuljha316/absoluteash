@@ -296,7 +296,7 @@ input.check-toggle-round-flat:checked + label:after {
         <div class="col-md-10 mx-auto" style="margin-top: 50px;">
 
             {{#if topic}}
-                <form action="/questions/{{topic._id}}/edit" method="POST" enctype="application/x-www-form-urlencoded" class="form-border">
+                <form action="/questions/{{topic._id}}/edit" method="POST" enctype="application/x-www-form-urlencoded" class="form-border" onsubmit="return validateForm()">
                     <h3 class="text-center"><a href="/topics/{{topic._id}}" class="text-capitalize text-primary text-decoration-none"> {{topic.name}} </a> </h3>
 
                     {{#if successMessage}}
@@ -313,6 +313,25 @@ input.check-toggle-round-flat:checked + label:after {
                             </div>
                         {{/each}}
                     {{/if}}
+<div class='form-field'>
+                            <div class='form-field' style="margin-top:8px;">
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Subject </label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Physics <input type="radio" value="1" {{#if (eq "1" topic.quesubject) }} checked  {{/if}} name="quesubject">
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Maths <input type="radio" value="2" {{#if (eq "2" topic.quesubject) }} checked  {{/if}} name="quesubject"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Chemistry <input type="radio" value="3" {{#if (eq "3" topic.quesubject) }} checked  {{/if}} name="quesubject"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Biology <input type="radio" value="4" {{#if (eq "4" topic.quesubject) }} checked  {{/if}} name="quesubject"><i></i>
+                            </label>
+                          </div>
+                          <br><br>
+                          </div>
 
 <div class='form-field'>
     <div class='form-field' style="margin-top:8px;">
@@ -336,6 +355,9 @@ input.check-toggle-round-flat:checked + label:after {
   </div>
   <br><br>
   </div>
+
+
+
    <!-- \( \[\frac{-vb\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch\( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) bjhjbjbh jbjhbjhbjhbjbj
 \( a^3/2a \) hello one two three nmdlkcnksdcnjdsncj bjhbcjwhbchj wbejhebjhewb 
 \( \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\prod_a^b\coprod_a^b\bigvee_a^b\bigcup_a^b\bigwedge_a^b\overbrace{ab}\widetilde{ab}\] \) hello one two three nmdlkcnksdcnjdsncj hjsbjahbjahbj hsbjhabjhasjchbd \( 1/ 2a^3 \)
@@ -349,6 +371,10 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
                         <label for="descritpion-1">Your question</label>
                         <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12">{{topic.question}}  </textarea>
                     </div>
+                    <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Hint</label>
+                                <textarea class="form-control latex" name="answerHint" id="answer-hint" placeholder="question" rows="12"> {{topic.answerHint}} </textarea>
+                            </div>
                     <div class="normal-option">
                      <div class="form-group mb-4 " >
                         <label for="descritpion-1">Answer 1</label>
@@ -371,7 +397,7 @@ hello one two three nmdlkcnksdcnjdsncj wjkbjhbcjhwebcjheb bcjhbjchbjch
   <div id="outputDiv"></div>-->
                     <div class="form-group mb-4 " >
                                 <label for="descritpion-1">Answer Explanation</label>
-                                <textarea class="form-control latex" name="answerExplanation" id="answer-explain" placeholder="question" rows="12">{{topic.answerExplanation}} </textarea>
+                                <textarea class="form-control latex" name="answerExplanation" id="answer-explain" placeholder="question" required rows="12">{{topic.answerExplanation}} </textarea>
                     </div>
                     {{#if topic.integeranswer }}
                     <div class='form-field integer-option' style="margin-top:8px;" id="correct-answer">

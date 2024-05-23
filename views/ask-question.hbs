@@ -297,7 +297,7 @@ input.check-toggle-round-flat:checked + label:after {
         <div class="col-md-10 mx-auto" style="margin-top: 50px;">
 
             {{#if topic}}
-                <form action="/topics/{{topic._id}}/question" method="POST" enctype="multipart/form-data" class="form-border">
+                <form action="/topics/{{topic._id}}/question" method="POST" enctype="multipart/form-data" class="form-border" onsubmit="return validateForm()">
                     <h3 class="text-center"><a href="/topics/{{topic._id}}" class="text-capitalize text-primary text-decoration-none"> {{topic.name}} </a> </h3>
 
                     {{#if successMessage}}
@@ -314,6 +314,26 @@ input.check-toggle-round-flat:checked + label:after {
                             </div>
                         {{/each}}
                     {{/if}}
+
+                        <div class='form-field'>
+                            <div class='form-field' style="margin-top:8px;">
+                            <label for='sizeFilter-3' style="float:left;margin-top:8px;">Subject </label><br><br>
+                            <label class="creative-checkbox halo-bg">
+                                Physics <input type="radio" value="1"  name="quesubject">
+                                <i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Maths <input type="radio" value="2"  name="quesubject"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Chemistry <input type="radio" value="3"  name="quesubject"><i></i>
+                            </label>
+                            <label class="creative-checkbox halo-bg">
+                                Biology <input type="radio" value="4"  name="quesubject"><i></i>
+                            </label>
+                          </div>
+                          <br><br>
+                          </div>
 
                         <div class='form-field'>
                             <div class='form-field' style="margin-top:8px;">
@@ -342,6 +362,10 @@ input.check-toggle-round-flat:checked + label:after {
                             <div class="form-group mb-4 " >
                                 <label for="descritpion-1">Your question</label>
                                 <textarea class="form-control latex" name="question" id="question" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="\( \frac{-b \pm \sqrt{b^2-4ac}}{2a} \prod_a^b \coprod_a^b \bigvee_a^b \bigcup_a^b \bigwedge_a^b \overbrace{ab} \widetilde{ab} \)" data-mce-style="cursor: pointer;"></span>  </textarea>
+                            </div>
+                            <div class="form-group mb-4 " >
+                                <label for="descritpion-1">Hint</label>
+                                <textarea class="form-control latex" name="answerHint" id="answer-hint" placeholder="question" rows="12"><span class="math-tex" style="cursor: pointer;" contenteditable="false" data-latex="" data-mce-style="cursor: pointer;"></span>  </textarea>
                             </div>
                             <div class="normal-option">
                             <div class="form-group mb-4 " >

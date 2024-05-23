@@ -243,7 +243,7 @@ exports.handleCreateQuestion = async (req, res, next) => {
 			if (!errors.isEmpty()) {
 				input.errors = errors.array()
 			} else {
-				const { question,video,quetype,examtype,answerExplanation,integeranswer,numericanswer,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive } = req.body
+				const { question,video,quetype,quesubject,examtype,answerExplanation,answerHint,integeranswer,numericanswer,queshift,queyear,showAns,answerOne,answerTwo,answerThree,answerFour,answerFive,correctanswer,difficultylevel,topiccode,showFive } = req.body
 				const connectedUser = req.user
 				if(quetype == '1' || quetype == '2' || quetype == '3'){
 					const newQuestion = await Question.create({
@@ -255,6 +255,8 @@ exports.handleCreateQuestion = async (req, res, next) => {
 						video:video ?? "no-video",
 						slugText : removeHtmlAndGetSlug(question),
 						quetype: quetype,
+						quesubject: quesubject,
+						answerHint:answerHint,
 						examtype:examtype,
 						queshift: queshift,
 						queyear:queyear,
@@ -305,6 +307,8 @@ exports.handleCreateQuestion = async (req, res, next) => {
 						video:video ?? "no-video",
 						slugText : removeHtmlAndGetSlug(question),
 						quetype: quetype,
+						quesubject: quesubject,
+						answerHint:answerHint,
 						examtype:examtype,
 						queshift: queshift,
 						queyear:queyear,
@@ -350,6 +354,8 @@ exports.handleCreateQuestion = async (req, res, next) => {
 						video:video ?? "no-video",
 						slugText : removeHtmlAndGetSlug(question),
 						quetype: quetype,
+						quesubject: quesubject,
+						answerHint:answerHint,
 						examtype:examtype,
 						queshift: queshift,
 						queyear:queyear,
