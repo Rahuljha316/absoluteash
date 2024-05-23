@@ -9,6 +9,10 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	adminAccess: {
+		type: Boolean,
+		required: false
+	},
 	email: {
 		type: String,
 		unique: true,

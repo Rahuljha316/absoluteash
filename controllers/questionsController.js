@@ -185,6 +185,25 @@ exports.handleCreateAnswer = async (req, res, next) => {
 	}
 }
 
+
+exports.handleApproveQuestion = async (req, res, next) => {
+const queId = req.params.id;
+const referrer = req.get('Referer');
+const filter = { _id: queId }; // Replace with the actual document ID
+					const update2 = { $set: {
+							adminApproved:"1",
+						} }; // Replace with the field you want to update
+						await Question.updateOne(filter, update2, (err, result) => {
+						    if (err) {
+						      console.error('Error updating document:', err);
+						      return;
+						    }
+
+						    console.log('Question Approved Successfully:', result);
+						});
+res.redirect(referrer);
+}
+
 exports.handleUpdateQuestion = async (req, res, next) => {
 	const errors = validator.validationResult(req)
 	const input = {
